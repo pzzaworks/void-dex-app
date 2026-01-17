@@ -1,0 +1,21 @@
+services:
+  voiddex-app:
+    image: voiddex-app:latest
+    container_name: voiddex-app
+    restart: always
+    env_file:
+      - .env.production
+    ports:
+      - "3012:3000"
+    networks:
+      - voiddex-network
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  voiddex-network:
+    name: voiddex-network
+    external: true

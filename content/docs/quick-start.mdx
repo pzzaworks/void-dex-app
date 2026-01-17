@@ -1,0 +1,76 @@
+---
+title: Quick Start
+icon: Rocket
+---
+
+import { DocImage } from '@/components/DocImage';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<DocImage title="Quick Start" />
+
+This guide walks you through your first private swap on VoidDex.
+
+## Requirements
+
+| Item | Description |
+|------|-------------|
+| Web3 Wallet | MetaMask, Rabby, or WalletConnect compatible |
+| Testnet ETH | For gas fees on Sepolia |
+| Test Tokens | Tokens to shield and swap |
+
+## Getting Started
+
+<Steps>
+<Step>
+### Connect Wallet
+
+Click "Connect Wallet" in the header. Select your wallet provider such as MetaMask, Rabby, or WalletConnect. Approve the connection request in your wallet to complete the connection.
+
+![Connect Wallet](/docs/quick-start-connect.png)
+</Step>
+
+<Step>
+### Create Private Wallet
+
+After connecting, you'll see both your public wallet and private wallet status in the header. Click on your wallet address to open the profile dropdown, then click "Create Private Wallet".
+
+Set a strong password for your private wallet. This password encrypts your wallet data locally in your browser. You'll then see your mnemonic phrase which is your backup. Save it securely offline as it's the only way to recover your wallet. Confirm the mnemonic by selecting the words in order to complete the setup.
+
+![Create Private Wallet](/docs/quick-start-create-wallet.png)
+</Step>
+
+<Step>
+### Shield Tokens
+
+Before you can swap privately, you need to shield tokens into your private balance. Click "Shield Tokens" in the Sell section or from the profile dropdown. Select the token you want to shield and enter the amount. Confirm the transaction in your wallet.
+
+Wait for the transaction to confirm on the blockchain. Your private balance will update after the SDK syncs with the latest state. The first shield operation takes longer because Railgun artifacts need to be downloaded.
+
+![Shield Tokens](/docs/quick-start-shield.png)
+</Step>
+
+<Step>
+### Execute Private Swap
+
+Select the token you want to sell from your shielded balance and the token you want to buy. Enter the amount and VoidDex will fetch the best quote from multiple DEXes. Review the quote details including the expected output and route information.
+
+Click "Swap" and sign the transaction in your wallet. The swap executes privately through Railgun's privacy layer. Your output tokens will appear in your shielded balance after confirmation.
+
+![Execute Private Swap](/docs/quick-start-swap.png)
+</Step>
+
+<Step>
+### Unshield (Optional)
+
+If you want to move tokens back to a public address, open the profile dropdown and click "Unshield Tokens". Select the token and amount you want to withdraw. Enter the destination address which can be any public Ethereum address. Confirm the transaction to complete the unshield.
+
+![Unshield Tokens](/docs/quick-start-unshield.png)
+</Step>
+</Steps>
+
+## Tips
+
+- Keep your tokens shielded between swaps to maximize privacy
+- The first shield operation downloads Railgun artifacts which takes longer
+- Ensure you have enough WETH in your private balance to cover broadcaster fees for private swaps
+- Review the fee breakdown in Swap Details before confirming transactions

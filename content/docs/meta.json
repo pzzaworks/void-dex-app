@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "---Getting Started---",
+    "what-is-voiddex",
+    "quick-start",
+    "how-it-works",
+    "---Features---",
+    "private-swaps",
+    "dex-aggregation",
+    "railgun-integration",
+    "---Reference---",
+    "supported-networks",
+    "architecture",
+    "security",
+    "fees"
+  ]
+}

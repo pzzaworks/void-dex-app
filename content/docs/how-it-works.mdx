@@ -1,0 +1,109 @@
+---
+title: How It Works
+icon: Settings
+---
+
+import { DocImage } from '@/components/DocImage';
+
+<DocImage title="How It Works" />
+
+VoidDex combines DEX aggregation with Railgun's privacy layer to enable private token swaps. This page explains the technical flow and what happens when you execute privacy operations.
+
+## The Privacy Flow
+
+```mermaid
+flowchart TD
+    A[Public Tokens] --> B[Shield]
+    B --> C[Private Balance]
+    C --> D[Private Swap]
+    D --> C
+    C --> E[Unshield]
+    E --> F[Public Address]
+```
+
+Your tokens start in your public wallet visible on the blockchain. When you shield them, they enter Railgun's privacy pool and become part of your private balance. You can then execute swaps privately, with the output going back to your private balance. When you're ready to use tokens publicly, you unshield them to any address.
+
+## What's Hidden
+
+| Operation | What's Hidden | What's Visible |
+|-----------|---------------|----------------|
+| Shield | Final destination | Source address, amount |
+| Private Swap | Everything | Nothing (just a Railgun TX) |
+| Unshield | Source of funds | Destination address, amount |
+| Transfer | Sender & recipient | Nothing (just a Railgun TX) |
+
+## Shield Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Railgun
+    participant Blockchain
+
+    User->>Browser: Initiate Shield
+    Browser->>Browser: Generate ZK Proof
+    Browser->>Blockchain: Submit Shield TX
+    Blockchain->>Railgun: Transfer Tokens
+    Railgun->>Railgun: Create Commitment
+    Browser->>Railgun: Scan for Balance
+    Railgun-->>Browser: Encrypted Balance
+    Browser-->>User: Show Private Balance
+```
+
+When you shield tokens, they are transferred to the Railgun smart contract and a zkSNARK commitment is created that represents your balance. This commitment hides your wallet address, the token amount, and the token type. Your shielded balance is only visible to you through your private wallet because only you have the keys to decrypt it.
+
+## Private Swap Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant API
+    participant Railgun
+    participant Router
+    participant DEX
+
+    User->>Browser: Request Swap
+    Browser->>API: Get Quote
+    API->>DEX: Query Prices
+    DEX-->>API: Best Route
+    API-->>Browser: Quote Details
+    User->>Browser: Confirm Swap
+    Browser->>Browser: Generate ZK Proof
+    Browser->>Railgun: Submit Private TX
+    Railgun->>Router: Call VoidDex Router
+    Router->>DEX: Execute Swap
+    DEX-->>Router: Output Tokens
+    Router-->>Railgun: Return to Privacy Pool
+    Railgun-->>Browser: Updated Balance
+```
+
+When you execute a swap, VoidDex fetches the best quote from multiple DEXes. The Railgun SDK then generates a zero-knowledge proof in your browser. This proof demonstrates you have sufficient balance without revealing which specific tokens are yours. The swap executes through Railgun which calls the VoidDex Router contract to perform the actual DEX swap. Output tokens are automatically shielded back into your private balance.
+
+## Unshield Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Railgun
+    participant Blockchain
+    participant Destination
+
+    User->>Browser: Initiate Unshield
+    Browser->>Browser: Generate ZK Proof
+    Browser->>Railgun: Submit Unshield
+    Railgun->>Blockchain: Release Tokens
+    Blockchain->>Destination: Transfer to Address
+```
+
+When you unshield, you generate a proof that you own certain tokens in the privacy pool. The Railgun contract verifies this proof and releases the tokens to your specified destination address. The destination can be any Ethereum address including your own public wallet or a completely different address.
+
+## Why Railgun?
+
+Railgun is the leading privacy protocol for DeFi. It uses zkSNARK proofs which provide cryptographically proven privacy that cannot be broken without solving extremely hard mathematical problems. The protocol has processed significant volume securely and works with any ERC-20 token. It's fully non-custodial with no trusted parties holding your funds.
+
+## Technical Details
+
+VoidDex uses the Railgun SDK which runs entirely in your browser. It handles wallet creation and encryption, balance scanning and merkle tree synchronization, zero-knowledge proof generation, and transaction construction. All cryptographic operations use WASM modules for performance. See [Architecture](/docs/architecture) for more technical details.

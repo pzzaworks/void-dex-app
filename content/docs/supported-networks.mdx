@@ -1,0 +1,45 @@
+---
+title: Supported Networks
+icon: Globe
+---
+
+import { DocImage } from '@/components/DocImage';
+
+<DocImage title="Supported Networks" />
+
+VoidDex operates on EVM-compatible networks where Railgun is deployed. This page lists currently supported and planned networks.
+
+## Network Status
+
+| Network | Chain ID | Status | Native Token | DEXes |
+|---------|----------|--------|--------------|-------|
+| Sepolia | 11155111 | Active (Testnet) | ETH | 1 |
+| Ethereum | 1 | Ready | ETH | 4 |
+| Polygon | 137 | Ready | MATIC | 5 |
+| Arbitrum | 42161 | Ready | ETH | 5 |
+| BSC | 56 | Ready | BNB | 5 |
+
+VoidDex only supports networks where Railgun is deployed. All networks listed above have full Railgun privacy support.
+
+## Current Network
+
+VoidDex is currently in testnet phase on Sepolia with full private swap functionality. Use testnet ETH and tokens to try the platform before mainnet launch. Sepolia ETH can be obtained from various faucets like [sepoliafaucet.com](https://sepoliafaucet.com).
+
+## Mainnet Networks
+
+**Ethereum Mainnet** is the primary network with the deepest liquidity. Integrated DEXes include Uniswap V3, Uniswap V2, SushiSwap, and SushiSwap V3.
+
+**Polygon** offers lower gas costs while maintaining full Railgun privacy support. Integrated DEXes include Uniswap V3, QuickSwap, QuickSwap V3, SushiSwap, and ApeSwap.
+
+**Arbitrum** is an Ethereum L2 with significantly lower gas fees and fast confirmations. Integrated DEXes include Uniswap V3, SushiSwap, SushiSwap V3, Camelot, and Trader Joe.
+
+**BNB Smart Chain** provides access to the Binance ecosystem. Integrated DEXes include PancakeSwap V3, PancakeSwap V2, SushiSwap, Biswap, and ApeSwap.
+
+## Token Support
+
+VoidDex supports any ERC-20 token on supported networks. When shielding native tokens like ETH, MATIC, or BNB, they are automatically wrapped to their ERC-20 equivalent (WETH, WMATIC, WBNB) since Railgun only works with ERC-20 tokens.
+
+## Getting Testnet Tokens
+
+- Get Sepolia ETH from [sepoliafaucet.com](https://sepoliafaucet.com)
+- Search for specific token faucets for test tokens

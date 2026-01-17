@@ -1,0 +1,55 @@
+---
+title: Fees
+icon: Coins
+---
+
+import { DocImage } from '@/components/DocImage';
+
+<DocImage title="Fees" />
+
+This page explains the fees involved when using VoidDex.
+
+## Fee Overview
+
+| Fee Type | Amount | When Charged |
+|----------|--------|--------------|
+| VoidDex Protocol | 0.05% | On swap execution |
+| Railgun Unshield | 0.25% | When unshielding from private balance |
+| Broadcaster | Variable | When using relayer for privacy |
+| DEX Swap | 0.01-1% | Varies by DEX and pool |
+| Network Gas | Variable | Every transaction |
+
+## VoidDex Protocol Fee
+
+VoidDex charges a 0.05% protocol fee on swap execution. This fee is deducted from the input token amount and helps sustain development and infrastructure costs.
+
+## Broadcaster Fee
+
+When executing private swaps, a broadcaster (relayer) submits your transaction to maintain privacy. The broadcaster charges a fee in WETH for this service. This fee varies based on network gas prices and is displayed before you confirm a swap.
+
+## Gas Fees
+
+You pay network gas fees for all on-chain operations. Shielding requires a transaction to transfer tokens to the Railgun contract. Swapping requires a transaction to execute the private swap. Unshielding requires a transaction to withdraw tokens to a public address. Gas costs vary by network and congestion. On Sepolia testnet, gas is essentially free since you're using testnet ETH.
+
+## Railgun Fees
+
+Railgun charges a 0.25% fee when unshielding tokens from your private balance. Shielding tokens into your private balance is free (no Railgun fee, only gas).
+
+## Cost Example
+
+For a private swap of 1 WETH to USDC:
+
+| Fee Type | Amount | Notes |
+|----------|--------|-------|
+| VoidDex Protocol | 0.0005 WETH | 0.05% of input |
+| Broadcaster Fee | ~0.001-0.005 WETH | Varies by gas price |
+| DEX Fee | 0.003 WETH | 0.3% (typical Uniswap V3) |
+| Network Gas | ~0.002-0.01 ETH | For proof verification |
+
+Total fees are typically 0.5-1% of the swap value, varying based on network congestion and the DEX pools used.
+
+## Minimizing Costs
+
+- Batch operations by shielding larger amounts less frequently
+- Keep tokens in your private balance between swaps
+- Use L2 networks like Arbitrum for lower gas costs

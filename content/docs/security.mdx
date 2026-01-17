@@ -1,0 +1,55 @@
+---
+title: Security
+icon: Lock
+---
+
+import { DocImage } from '@/components/DocImage';
+
+<DocImage title="Security" />
+
+Security is paramount for VoidDex. This page outlines our security measures and best practices.
+
+## Security Model
+
+| Aspect | Protection |
+|--------|------------|
+| Private Keys | Generated and stored locally in browser |
+| ZK Proofs | Generated locally, never transmitted |
+| Balance Data | Encrypted, only you can decrypt |
+| Server Access | No access to private data |
+| Wallet Data | Encrypted with your password |
+
+## Architecture Security
+
+VoidDex is designed to be fully non-custodial. Private wallet keys are generated and stored locally in your browser. Keys are encrypted with your password before being stored. There is no server-side key storage whatsoever. All transactions require your explicit approval through your wallet.
+
+All privacy operations happen in your browser. Zero-knowledge proofs are generated locally on your device. Private balance decryption happens client-side. No sensitive data is ever sent to VoidDex servers.
+
+## Railgun Security
+
+VoidDex relies on Railgun's battle-tested smart contracts. These contracts have undergone multiple audits by leading security firms. The protocol has a proven track record with significant real-world usage. All Railgun code is fully open source and auditable. An active bug bounty program incentivizes responsible disclosure of any vulnerabilities.
+
+## VoidDex Router Contract
+
+The VoidDex Router is a minimal smart contract that facilitates DEX swaps within Railgun's privacy system. It supports multi-hop swaps through multiple DEXes while maintaining privacy. The contract is designed to be simple and auditable with minimal attack surface. Router contract addresses are published and verifiable on block explorers.
+
+## Data Privacy
+
+VoidDex minimizes data collection. There are no analytics or tracking scripts on the platform. We do not log wallet addresses or sensitive API request parameters. Authentication uses SIWE (Sign-In with Ethereum) rather than traditional email and password systems, meaning we never store your credentials.
+
+## Best Practices
+
+- Secure your mnemonic phrase offline and never share it
+- Use a strong password for your private wallet
+- Verify you're on the official VoidDex site before connecting
+- Start with small test transactions before larger amounts
+
+## Responsible Disclosure
+
+If you find a security issue, please report it responsibly. Do not disclose vulnerabilities publicly before we've had time to assess and address them. Contact us through a private GitHub issue or reach out directly. We take all security reports seriously and will respond promptly.
+
+## Disclaimer
+
+<Callout type="warn">
+VoidDex is experimental software currently in testnet. Use at your own risk. Do not use funds you cannot afford to lose. The team is not responsible for any losses that may occur.
+</Callout>
